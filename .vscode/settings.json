@@ -1,5 +1,0 @@
-{
-  "yaml.schemas": {
-    "https://json.schemastore.org/circleciconfig.json": "file:///Users/felixshift/Desktop/dev/repos/github/cci-koans-work/.circleci/config.yml"
-  }
-}
