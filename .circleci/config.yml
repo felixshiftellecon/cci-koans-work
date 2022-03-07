@@ -15,8 +15,7 @@ jobs:
       - run:
           name: Run /tmp/tests-to-run
           command: |
-            chmod +x /tmp/tests-to-run
-            bash /tmp/tests-to-run
+            bash $(cat /tmp/tests-to-run)
 
 workflows:
   test:
