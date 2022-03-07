@@ -8,7 +8,14 @@ jobs:
     steps:
       - checkout
       # These two tests should run in parallel. Make it so!
-      - run: circleci tests glob "src/*.sh" | circleci tests split
+      - run: 
+          name: split tests
+          command: |
+            circleci tests glob "src/*.sh" | circleci tests split > /tmp/tests-to-run
+      - run:
+          name: Run /tmp/tests-to-run
+          command: |
+            bash /tmp/tests-to-run
 
 workflows:
   test:
