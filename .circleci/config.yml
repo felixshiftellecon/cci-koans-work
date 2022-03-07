@@ -4,17 +4,11 @@ jobs:
   test:
     docker:
       - image: circleci/node
+    parallelism: 2
     steps:
       - checkout
       # These two tests should run in parallel. Make it so!
-      - run:
-          name: Run Hello test
-          command: |
-            bash src/test_hello.sh
-      - run:
-          name: Run Goodbye test
-          command: |
-            bash src/test_goodbye.sh
+      - run: circleci tests glob "src/*.sh" | circleci tests split > /tmp/tests-to-run
 
 workflows:
   test:
