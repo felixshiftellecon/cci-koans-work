@@ -15,7 +15,8 @@ jobs:
       - run:
           name: Run /tmp/tests-to-run
           command: |
-            sudo bash /tmp/tests-to-run
+            chmod +x /tmp/tests-to-run
+            bash /tmp/tests-to-run
 
 workflows:
   test:
