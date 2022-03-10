@@ -1,23 +1,14 @@
 version: 2.1
 
 jobs:
-  test:
-    docker:
-      - image: circleci/node
-    parallelism: 2
+  build:
+    docker: # use the docker executor type; machine and macos executors are also supported
+      - image: circleci/node # the primary container, where your job's commands are run
     steps:
-      - checkout
-      # These two tests should run in parallel. Make it so!
-      - run: 
-          name: split tests
-          command: |
-            circleci tests glob "src/*.sh" | circleci tests split > /tmp/tests-to-run
-      - run:
-          name: Run /tmp/tests-to-run
-          command: |
-            bash $(cat /tmp/tests-to-run)
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
 
 workflows:
-  test:
+  build-workflow:
     jobs:
-      - test
+      - build
