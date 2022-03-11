@@ -1,38 +1,21 @@
 version: 2.1
 
+orbs:
+  build-tools: circleci/build-tools@3.0.0 # This is an orb. If you are not yet familiar with orbs, we will go over them soon. Orbs allow us to make our configs shorter by allowing us to "import" config in a similar way to a programming language's package manager.
+
 jobs:
   build:
-    docker:
-      - image: cimg/base:2022.03
+    docker: 
+      - image: cimg/base:2022.03 
     steps:
-      - checkout
-      - run: echo "Building complete"
-  test-node:
-    docker:
-      - image: cimg/node:17.6.0
-    steps:
-      - run: echo "Testing complete"
-  test-node-16:
-    docker:
-      - image: cimg/node:16.14.0
-    steps:
-      - run: echo "Testing complete"
-  test-node-14:
-    docker:
-      - image: cimg/node:14.19.0
-    steps:
-      - run: echo "Testing complete"
-  deploy:
-      docker:
-        - image: cimg/base:2022.03
-      steps:
-        - run: echo "DEPLOYING" # Make sure all tests pass first!
+      - build-tools/test-results:
+          data-dir: ~/project/results
+          upload: true
+# Add below this line, do not modify above
+
+# Add above this line, do not modify below
 
 workflows:
-  build-test-and-deploy:
+  build-workflow:
     jobs:
       - build
-      - test-node
-      - test-node-16
-      - test-node-14
-      - deploy
